@@ -1,5 +1,4 @@
 "use client";
-
 import { useState } from "react";
 import ColorSelector from "./ColorSelector";
 import ThumbnailSelector from "./ThumbnailSelector";
@@ -19,51 +18,51 @@ export default function HeroSection() {
   const [selectedColor, setSelectedColor] = useState<WatchColor>("navy");
 
   const handleColorChange = (direction: "next" | "prev") => {
-    const currentIndex = COLOR_ORDER.indexOf(selectedColor);
-    const newIndex = direction === "next" ? (currentIndex + 1) % COLOR_ORDER.length : (currentIndex - 1 + COLOR_ORDER.length) % COLOR_ORDER.length;
-    setSelectedColor(COLOR_ORDER[newIndex]);
+    setSelectedColor((prevColor) => {
+      const currentIndex = COLOR_ORDER.indexOf(prevColor);
+      const newIndex = direction === "next" ? (currentIndex + 1) % COLOR_ORDER.length : (currentIndex - 1 + COLOR_ORDER.length) % COLOR_ORDER.length;
+      return COLOR_ORDER[newIndex];
+    });
   };
 
   const currentIndex = COLOR_ORDER.indexOf(selectedColor);
 
   const getNumberIcon = () => {
-    const icons = [<RiNumber1 />, <RiNumber2 />, <RiNumber3 />];
-    return <div className="text-[1.5rem] text-white">{icons[currentIndex]}</div>;
+    const numberIcons = [RiNumber1, RiNumber2, RiNumber3];
+    const StepIcon = numberIcons[currentIndex];
+    return <StepIcon className="text-xl" />;
   };
 
   return (
-    <section className="relative min-h-screen bg-[#b6ccda] text-white px-16 py-20 overflow-hidden rounded-[1rem]">
-      {/* Top Grid */}
-      <div className="grid grid-cols-2 items-center">
-        {/* LEFT: Text */}
-        <div className="space-y-6">
-          <h1 className="text-[4.5rem] font-bold leading-tight">The Perfect Moment</h1>
-          <p className="text-[2.5rem] text-white leading-snug">Between Past And Future.</p>
-          <button className="mt-6 border border-white text-white px-8 py-2 rounded-full text-lg hover:bg-white hover:text-[#b6ccda] transition-all">Buy Now</button>
+    <section className="grid grid-rows-[auto_auto] ml-[5%]">
+      {/* Grid layout for text + image */}
+      <div className="grid grid-cols-2">
+        {/* Text Area */}
+        <div className="flex flex-col justify-center pt-[10%] leading-[70pt]">
+          <h1 className="text-[5.5rem] font-bold">The Perfect Moment</h1>
+          <p className="text-[5.25rem]">Between Past And Future.</p>
+          <button className="flex justify-center items-center w-[300px] border-2 border-white rounded-full bg-transparent text-white tracking-wider text-[38px] mt-[10%] hover:bg-white hover:text-black transition duration-300">Buy now</button>
         </div>
 
-        {/* RIGHT: Watch + ColorSelector */}
-        <div className="relative flex justify-center items-center">
-          <img src={watchImages[selectedColor]} alt={`${selectedColor} watch`} className="w-[420px] z-10" />
-          <div className="absolute right-[-40px] top-[25%] flex flex-col gap-4 z-20">
-            <ColorSelector selected={selectedColor} setSelected={setSelectedColor} />
-          </div>
+        {/* Watch Image + Color Selector */}
+        <div className="relative flex items-center justify-center">
+          <img src={watchImages[selectedColor]} alt={`${selectedColor} watch`} className="w-[700px] z-10" />
         </div>
       </div>
+      <div className="absolute right-[10%] top-[20%] z-20">
+        <ColorSelector selected={selectedColor} setSelected={setSelectedColor} />
+      </div>
 
-      {/* Bottom: Navigation and Thumbnails */}
-      <div className="absolute bottom-10 left-0 right-0 px-16 flex items-center justify-between">
-        {/* Navigation Arrows */}
-        <div className="flex items-center gap-6">
-          <FaArrowLeftLong onClick={() => handleColorChange("prev")} className={`text-white text-xl cursor-pointer transition-transform ${currentIndex === 0 ? "opacity-50 cursor-not-allowed" : "hover:scale-125"}`} />
-          {getNumberIcon()}
-          <FaArrowRight onClick={() => handleColorChange("next")} className={`text-white text-xl cursor-pointer transition-transform ${currentIndex === COLOR_ORDER.length - 1 ? "opacity-50 cursor-not-allowed" : "hover:scale-125"}`} />
-        </div>
+      {/* Thumbnails */}
+      <div className="flex justify-end pr-[13%] mt-[680px] z-[2]">
+        <ThumbnailSelector selected={selectedColor} setSelected={setSelectedColor} />
+      </div>
 
-        {/* Thumbnails */}
-        <div>
-          <ThumbnailSelector selected={selectedColor} setSelected={setSelectedColor} />
-        </div>
+      {/* Navigation Arrows + Step Indicator */}
+      <div className="flex items-center gap-8 mt-8 ml-[0.5%] relative z-[5] top-[-20.5rem]">
+        <FaArrowLeftLong onClick={() => handleColorChange("prev")} className={`cursor-pointer text-white text-5xl p-2 hover:scale-125 transition-transform ${currentIndex === 0 ? "opacity-50 pointer-events-none" : ""}`} />
+        <div className="flex items-center justify-center w-[50px] h-[50px] rounded-full bg-white/10 text-[1.2rem]">{getNumberIcon()}</div>
+        <FaArrowRight onClick={() => handleColorChange("next")} className={`cursor-pointer text-white text-5xl p-2 hover:scale-125 transition-transform ${currentIndex === COLOR_ORDER.length - 1 ? "opacity-50 pointer-events-none" : ""}`} />
       </div>
     </section>
   );

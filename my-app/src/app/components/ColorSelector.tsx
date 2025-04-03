@@ -1,5 +1,3 @@
-"use client";
-
 type WatchColor = "navy" | "mint" | "ocean";
 
 interface Props {
@@ -7,19 +5,28 @@ interface Props {
   setSelected: (color: WatchColor) => void;
 }
 
-export default function ColorSelector({ selected, setSelected }: Props) {
-  const colors: WatchColor[] = ["navy", "mint", "ocean"];
+export default function ThumbnailSelector({ selected, setSelected }: Props) {
+  const thumbnails: WatchColor[] = ["navy", "mint", "ocean"];
 
-  const colorStyles: Record<WatchColor, string> = {
-    navy: "bg-[#434558]",
-    mint: "bg-[#6ADDCC]",
-    ocean: "bg-[#F9CDC4]",
+  const backgroundColors: Record<WatchColor, string> = {
+    navy: "#434558",
+    mint: "#6ADDCC",
+    ocean: "#F9CDC4",
   };
 
   return (
-    <div className="flex flex-col gap-4">
-      {colors.map((color) => (
-        <button key={color} onClick={() => setSelected(color)} className={`w-5 h-5 rounded-full border-2 transition-all duration-200 ${colorStyles[color]} ${selected === color ? "ring-2 ring-white scale-110" : "border-gray-300"}`} />
+    <div className="flex gap-[25px]">
+      {thumbnails.map((color) => (
+        <button
+          key={color}
+          onClick={() => setSelected(color)}
+          aria-label={`Select ${color} thumbnail`}
+          className={`relative h-[60px] mt-[25px] p-2 rounded-[10px] transition-border duration-300 border-2
+            ${selected === color ? "border-black" : "border-transparent"}`}
+          style={{ backgroundColor: backgroundColors[color] }}
+        >
+          <img src={`/images/${color}.png`} alt={color} width="100" height="60" className="-mt-[55px]" />
+        </button>
       ))}
     </div>
   );
