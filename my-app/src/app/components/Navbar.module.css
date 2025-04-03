@@ -1,0 +1,56 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 3rem;
+  background-color: transparent;
+  font-family: sans-serif;
+  color: white;
+}
+
+.logo {
+  font-size: 3.8rem;
+  margin-left: 3%;
+}
+
+.menu {
+  display: flex;
+  gap: 7rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 2rem;
+}
+
+.menu li {
+  cursor: pointer;
+  opacity: 0.7;
+  transition: 0.3s;
+}
+
+.menu li:hover {
+  opacity: 1;
+}
+
+.active {
+  background-color: white;
+  color: #b6ccda;
+  padding: 0.3rem 1rem;
+  border-radius: 20px;
+  font-weight: bold;
+  opacity: 1 !important;
+}
+
+.icons {
+  display: flex;
+  gap: 1.5rem;
+  font-size: 2.2rem;
+  cursor: pointer;
+  margin-right: 3%;
+}
+
+.separator {
+  font-size: 2.2rem; /* Match icon size */
+  vertical-align: middle; /* Adjust alignment */
+  margin-top: -10px; /* Fine-tune position if needed */
+}
