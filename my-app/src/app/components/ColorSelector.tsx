@@ -1,4 +1,5 @@
 "use client";
+
 type WatchColor = "navy" | "mint" | "ocean";
 
 interface Props {
@@ -10,26 +11,15 @@ export default function ColorSelector({ selected, setSelected }: Props) {
   const colors: WatchColor[] = ["navy", "mint", "ocean"];
 
   const colorStyles: Record<WatchColor, string> = {
-    navy: "#434558",
-    mint: "#6ADDCC",
-    ocean: "#F9CDC4",
+    navy: "bg-[#434558]",
+    mint: "bg-[#6ADDCC]",
+    ocean: "bg-[#F9CDC4]",
   };
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+    <div className="flex flex-col gap-4">
       {colors.map((color) => (
-        <div
-          key={color}
-          onClick={() => setSelected(color)}
-          style={{
-            width: 20,
-            height: 20,
-            borderRadius: "50%",
-            backgroundColor: colorStyles[color],
-            border: selected === color ? "2px solid black" : "1px solid gray",
-            cursor: "pointer",
-          }}
-        />
+        <button key={color} onClick={() => setSelected(color)} className={`w-5 h-5 rounded-full border-2 transition-all duration-200 ${colorStyles[color]} ${selected === color ? "ring-2 ring-white scale-110" : "border-gray-300"}`} />
       ))}
     </div>
   );
