@@ -18,51 +18,50 @@ export default function HeroSection() {
   const [selectedColor, setSelectedColor] = useState<WatchColor>("navy");
 
   const handleColorChange = (direction: "next" | "prev") => {
-    setSelectedColor((prevColor) => {
-      const currentIndex = COLOR_ORDER.indexOf(prevColor);
-      const newIndex = direction === "next" ? (currentIndex + 1) % COLOR_ORDER.length : (currentIndex - 1 + COLOR_ORDER.length) % COLOR_ORDER.length;
-      return COLOR_ORDER[newIndex];
-    });
+    const currentIndex = COLOR_ORDER.indexOf(selectedColor);
+    const newIndex = direction === "next" ? (currentIndex + 1) % COLOR_ORDER.length : (currentIndex - 1 + COLOR_ORDER.length) % COLOR_ORDER.length;
+    setSelectedColor(COLOR_ORDER[newIndex]);
   };
-
-  const currentIndex = COLOR_ORDER.indexOf(selectedColor);
 
   const getNumberIcon = () => {
     const numberIcons = [RiNumber1, RiNumber2, RiNumber3];
-    const StepIcon = numberIcons[currentIndex];
-    return <StepIcon className="text-xl" />;
+    const StepIcon = numberIcons[COLOR_ORDER.indexOf(selectedColor)];
+    return <StepIcon className="text-2xl text-white" />;
   };
 
   return (
-    <section className="grid grid-rows-[auto_auto] ml-[5%]">
-      {/* Grid layout for text + image */}
-      <div className="grid grid-cols-2">
-        {/* Text Area */}
-        <div className="flex flex-col justify-center pt-[10%] leading-[70pt]">
-          <h1 className="text-[5.5rem] font-bold">The Perfect Moment</h1>
-          <p className="text-[5.25rem]">Between Past And Future.</p>
-          <button className="flex justify-center items-center w-[300px] border-2 border-white rounded-full bg-transparent text-white tracking-wider text-[38px] mt-[10%] hover:bg-white hover:text-black transition duration-300">Buy now</button>
+    <section className="w-full px-6 py-20 bg-[#b6ccda] font-sans">
+      {/* Wrapper */}
+      <div className="grid grid-rows-[auto_auto] gap-8 max-w-[1400px] mx-auto">
+        {/* Text + Watch Image */}
+        <div className="grid lg:grid-cols-2 gap-[12rem] items-center">
+          {/* Text */}
+          <div className="flex flex-col justify-center pt-[10%]">
+            <h1 className="text-[5.5rem] font-bold leading-[1.1] text-white mb-8">The Perfect Moment</h1>
+            <p className="text-[5.25rem] leading-[1.1] text-white mb-8">Between Past And Future.</p>
+            <button className="inline-flex items-center justify-center w-[300px] h-[60px] border-2 border-white rounded-full bg-transparent text-white text-[1.5rem] tracking-wide mt-[10%] transition-all duration-300 hover:bg-white hover:text-black">Buy now</button>
+          </div>
+
+          {/* Image + Color Selector */}
+          <div className="relative flex justify-center items-center mb-[5%] overflow-visible">
+            <img src={watchImages[selectedColor]} alt={`${selectedColor} watch`} className="w-auto h-auto scale-[1.5] transform z-10 -mt-20 ml-30" />
+            <div className="absolute -right-33 top-1/2 -translate-y-1/2 z-20 scale-[1.5]">
+              <ColorSelector selected={selectedColor} setSelected={setSelectedColor} />
+            </div>
+          </div>
         </div>
 
-        {/* Watch Image + Color Selector */}
-        <div className="relative flex items-center justify-center">
-          <img src={watchImages[selectedColor]} alt={`${selectedColor} watch`} className="w-[700px] z-10" />
+        {/* ThumbnailSelector */}
+        <div className="flex justify-end pr-[13%] mt-8 z-10 -mr-40">
+          <ThumbnailSelector selected={selectedColor} setSelected={setSelectedColor} />
         </div>
-      </div>
-      <div className="absolute right-[10%] top-[20%] z-20">
-        <ColorSelector selected={selectedColor} setSelected={setSelectedColor} />
-      </div>
 
-      {/* Thumbnails */}
-      <div className="flex justify-end pr-[13%] mt-[680px] z-[2]">
-        <ThumbnailSelector selected={selectedColor} setSelected={setSelectedColor} />
-      </div>
-
-      {/* Navigation Arrows + Step Indicator */}
-      <div className="flex items-center gap-8 mt-8 ml-[0.5%] relative z-[5] top-[-20.5rem]">
-        <FaArrowLeftLong onClick={() => handleColorChange("prev")} className={`cursor-pointer text-white text-5xl p-2 hover:scale-125 transition-transform ${currentIndex === 0 ? "opacity-50 pointer-events-none" : ""}`} />
-        <div className="flex items-center justify-center w-[50px] h-[50px] rounded-full bg-white/10 text-[1.2rem]">{getNumberIcon()}</div>
-        <FaArrowRight onClick={() => handleColorChange("next")} className={`cursor-pointer text-white text-5xl p-2 hover:scale-125 transition-transform ${currentIndex === COLOR_ORDER.length - 1 ? "opacity-50 pointer-events-none" : ""}`} />
+        {/* Arrow Navigation */}
+        <div className="flex items-center gap-8 mt-8 ml-[0.5%] relative z-10">
+          <FaArrowLeftLong onClick={() => handleColorChange("prev")} className={`navArrow cursor-pointer text-white text-5xl p-2 transition-transform hover:scale-125 ${selectedColor === "navy" ? "opacity-50 pointer-events-none" : ""}`} />
+          <div className="stepIndicator flex items-center justify-center w-[50px] h-[50px] rounded-full bg-white/10 text-[1.2rem]">{getNumberIcon()}</div>
+          <FaArrowRight onClick={() => handleColorChange("next")} className={`navArrow cursor-pointer text-white text-5xl p-2 transition-transform hover:scale-125 ${selectedColor === "ocean" ? "opacity-50 pointer-events-none" : ""}`} />
+        </div>
       </div>
     </section>
   );
