@@ -57,7 +57,7 @@ export default function HeroSection() {
         </div>
 
         {/* Arrow Navigation */}
-        <div className="flex items-center gap-8 mt-8 ml-[0.5%] relative z-10 bottom-35">
+        <div className="flex items-center gap-8 mt-8 -ml-25 relative z-10 bottom-35">
           <FaArrowLeftLong onClick={() => handleColorChange("prev")} className={`navArrow cursor-pointer text-white text-5xl p-2 transition-transform hover:scale-125 ${selectedColor === "navy" ? "opacity-50 pointer-events-none" : ""}`} />
           <div className="stepIndicator flex items-center justify-center w-[50px] h-[50px] rounded-full bg-white/10 text-[1.2rem]">{getNumberIcon()}</div>
           <FaArrowRight onClick={() => handleColorChange("next")} className={`navArrow cursor-pointer text-white text-5xl p-2 transition-transform hover:scale-125 ${selectedColor === "ocean" ? "opacity-50 pointer-events-none" : ""}`} />
