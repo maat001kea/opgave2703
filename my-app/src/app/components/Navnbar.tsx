@@ -1,5 +1,6 @@
 import { FaApple, FaSearch } from "react-icons/fa";
 import { FiShoppingBag } from "react-icons/fi";
+import Link from "next/link";
 
 export default function Navbar() {
   return (
