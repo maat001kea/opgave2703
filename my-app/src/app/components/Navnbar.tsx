@@ -10,7 +10,7 @@ export default function Navbar() {
       </div>
 
       {/* Center: Menu */}
-      <ul className="flex gap-10 text-[1.5rem] font-medium">
+      <ul className="flex gap-25 text-[1.5rem] font-medium">
         <li className="cursor-pointer opacity-70 hover:opacity-100 transition">Mac</li>
         <li className="cursor-pointer opacity-70 hover:opacity-100 transition">iPhone</li>
         <li className="cursor-pointer opacity-70 hover:opacity-100 transition">iPad</li>

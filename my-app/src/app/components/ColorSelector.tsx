@@ -23,7 +23,7 @@ export default function ColorSelector({ selected, setSelected }: Props) {
           onClick={() => setSelected(color)}
           aria-label={`Select ${color}`}
           className={`w-5 h-5 rounded-full border cursor-pointer transition 
-            ${selected === color ? "border-black" : "border-gray-400"}`}
+            ${selected === color ? "border-white" : "border-gray-400"}`}
           style={{ backgroundColor: colorStyles[color] }}
         />
       ))}
