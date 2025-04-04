@@ -39,12 +39,12 @@ export default function HeroSection() {
           <div className="flex flex-col  pt-[10%] -ml-25">
             <h1 className="text-[5.5rem] font-bold leading-[1.1] text-white mb-0 w-250">The Perfect Moment</h1>
             <p className="text-[5.25rem] leading-[1.1] text-white mb-8">Between Past And Future.</p>
-            <button className="inline-flex items-center justify-center w-[300px] h-[60px] border-2 border-white rounded-full bg-transparent text-white text-[1.5rem] tracking-wide mt-[10%] transition-all duration-300 hover:bg-white hover:text-black">Buy now</button>
+            <button className="inline-flex items-center justify-center w-[300px] h-[60px] border-2 border-white rounded-full bg-transparent text-white text-[1.5rem] tracking-wide mt-[15%] transition-all duration-300 hover:bg-white hover:text-black">Buy now</button>
           </div>
 
           {/* Image + Color Selector */}
           <div className="relative flex justify-center items-center mb-0 overflow-visible">
-            <img src={watchImages[selectedColor]} alt={`${selectedColor} watch`} className="w-auto h-auto scale-[1.5] transform z-10 -mt-20 ml-55" />
+            <img src={watchImages[selectedColor]} alt={`${selectedColor} watch`} className="w-auto h-auto scale-[1.5] transform  -mt-20 ml-55" />
             <div className="absolute -right-25 top-1/2 -translate-y-1/2 z-20 scale-[1.5]">
               <ColorSelector selected={selectedColor} setSelected={setSelectedColor} />
             </div>

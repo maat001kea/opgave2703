@@ -1,8 +1,13 @@
+"use client"; // 👈 Required for using usePathname()
+
 import { FaApple, FaSearch } from "react-icons/fa";
 import { FiShoppingBag } from "react-icons/fi";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export default function Navbar() {
+  const pathname = usePathname(); // ✅ You forgot this line before
+
   return (
     <nav className="flex justify-between items-center px-38 py-6 font-sans text-white bg-[#b6ccda] w-full z-50">
       {/* Left: Logo */}
@@ -11,12 +16,32 @@ export default function Navbar() {
       </div>
 
       {/* Center: Menu */}
-      <ul className="flex gap-25 text-[1.5rem] font-medium">
-        <li className="cursor-pointer opacity-70 hover:opacity-100 transition">Mac</li>
-        <li className="cursor-pointer opacity-70 hover:opacity-100 transition">iPhone</li>
-        <li className="cursor-pointer opacity-70 hover:opacity-100 transition">iPad</li>
-        <li className="bg-white text-[#b6ccda] px-5 py-1 rounded-full font-bold">iWatch</li>
-        <li className="cursor-pointer opacity-70 hover:opacity-100 transition">Support</li>
+      <ul className="flex gap-25 text-[1.5rem] font-medium  Z-1000">
+        <li>
+          <Link href="/mac">
+            <span className={`${pathname === "/mac" ? "underline decoration-white underline-offset-4" : "opacity-70 hover:opacity-100"}`}>iMac</span>
+          </Link>
+        </li>
+        <li>
+          <Link href="/ipad">
+            <span className={`${pathname === "/ipad" ? "underline decoration-white underline-offset-4" : "opacity-70 hover:opacity-100"}`}>iPad</span>
+          </Link>
+        </li>
+        <li>
+          <Link href="/iphone">
+            <span className={`${pathname === "/iphone" ? "underline decoration-white underline-offset-4" : "opacity-70 hover:opacity-100"}`}>iPhone</span>
+          </Link>
+        </li>
+        <li>
+          <Link href="/iwatch">
+            <span className={`${pathname === "/iwatch" ? "underline decoration-white underline-offset-4 font-bold" : "opacity-70 hover:opacity-100 Z-1000"}`}>iWatch</span>
+          </Link>
+        </li>
+        <li>
+          <Link href="/support">
+            <span className={`${pathname === "/support" ? "underline decoration-white underline-offset-4" : "opacity-70 hover:opacity-100 Z-1000"}`}>Support</span>
+          </Link>
+        </li>
       </ul>
 
       {/* Right: Icons */}

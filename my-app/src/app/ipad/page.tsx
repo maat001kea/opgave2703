@@ -1,7 +1,7 @@
 import Navbar from "../components/Navnbar";
 import HeroSection from "../components/HeroSection";
 
-export default function iWatch() {
+export default function iPad() {
   return (
     <>
       <Navbar />
